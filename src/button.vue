@@ -1,7 +1,7 @@
 <template>
     <button @click="$emit('click')" class='g-button' :class="[`icon-${iconPosition}`]">
         <g-icon v-if="loading"  class="loading icon" name="loading"></g-icon>
-        <g-icon v-if="icon && !loading" class="icon" name="settings"></g-icon>
+        <g-icon v-if="icon && !loading" class="icon" :name="icon"></g-icon>
         <div class="content">
             <slot></slot>
         </div>
@@ -75,7 +75,6 @@
                 margin-right: 0;
             }
             .content{
-                color: red;
                 order:1;
             }
         }
