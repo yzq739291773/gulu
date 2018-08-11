@@ -70,7 +70,7 @@
 
         &.icon-right{
             .icon{
-                order: 23;
+                order: 2;
                 margin-left: .1em;
                 margin-right: 0;
             }
