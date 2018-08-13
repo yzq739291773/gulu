@@ -53,7 +53,7 @@
             <g-input value="麻子"></g-input>
         </div>
         <div class="box">
-            <g-input value="麻子" error="用户名为英文"></g-input>
+            <g-input value="麻子" @change="inputChange" error="用户名为英文"></g-input>
         </div>
         <div class="box">
             <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
