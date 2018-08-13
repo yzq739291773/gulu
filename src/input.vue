@@ -7,7 +7,7 @@
          @change="$emit('change',$event,'第二个参数')"
          >
         <template v-if="error">
-            <icon class="icon-error" name="settings"></icon>
+            <icon class="icon-error" name="error"></icon>
             <span class="errorMessage">{{error}}</span>
         </template>
     </div>
