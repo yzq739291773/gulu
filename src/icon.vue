@@ -7,13 +7,14 @@
 <script>
 import './svg.js'
 export default {
+    name:'GuluIcon',
     props:{
         name:{}
     }
 }
 </script>
 
-<style>
+<style scoped>
     .g-icon {
         width: 1em;
         height: 1em;

@@ -30,6 +30,10 @@
         body {
             font-size: var(--font-size);
         }
+        
+        .box {
+            margin: 20px;
+        }
     </style>
     <style>
         .icon {
@@ -42,16 +46,28 @@
 
 <body>
     <div id="app">
-        <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
-        <g-button icon="settings" :loading="loading2" @click="loading2 = !loading2">按钮</g-button>
-        <g-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 = !loading3"> 按钮</g-button>
-        <g-icon name="download"></g-icon>
-        <g-button-group>
-            <g-button icon="left">上一页</g-button>
-            <g-button>更多</g-button>
-            <g-button icon-position="right" icon="right">下一页</g-button>
-        </g-button-group>
-        <div id="test"></div>
+        <div class="box">
+            <g-input value="张三" disabled></g-input>
+            <g-input value="李四" :readonly="true"></g-input>
+            <g-input value="王五"></g-input>
+            <g-input value="麻子"></g-input>
+        </div>
+        <div class="box">
+            <g-input value="麻子" error="用户名为英文"></g-input>
+        </div>
+        <div class="box">
+            <g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>
+            <g-button icon="settings" :loading="loading2" @click="loading2 = !loading2">按钮</g-button>
+            <g-button icon="settings" icon-position="right" :loading="loading3" @click="loading3 = !loading3"> 按钮</g-button>
+            <g-icon name="download"></g-icon>
+            <g-button-group>
+                <g-button icon="left">上一页</g-button>
+                <g-button>更多</g-button>
+                <g-button icon-position="right" icon="right">下一页</g-button>
+            </g-button-group>
+            <div id="test"></div>
+        </div>
+
     </div>
     <script type="text/javascript" src="./src/app.js"></script>
     <!-- <script src="//at.alicdn.com/t/font_786973_q7srhmq24ff.js"></script> -->
