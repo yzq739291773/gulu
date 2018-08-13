@@ -19,6 +19,9 @@ new Vue({
     methods: {
         inputChange(e, arg) {
             console.log(e.target.value, arg)
+        },
+        myInput(e, arg) {
+            console.log(e.target.value, arg)
         }
     }
 })
