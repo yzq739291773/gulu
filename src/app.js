@@ -13,15 +13,16 @@ new Vue({
     data: {
         loading1: false,
         loading2: false,
-        loading3: false
+        loading3: false,
+        message: 'hi'
 
     },
     methods: {
         inputChange(e, arg) {
-            console.log(e.target.value, arg)
+            console.log(e, arg)
         },
         myInput(e, arg) {
-            console.log(e.target.value, arg)
+            console.log(e, arg)
         }
     }
 })

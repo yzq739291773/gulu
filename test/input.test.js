@@ -70,10 +70,20 @@ describe('Input', () => {
                     vm.$on(eventName, callback)
                         // 触发input 的change事件
                     let event = new Event(eventName)
+                        // let inputElement = vm.$el.querySelector('input')
+                        // inputElement.dispatchEvent(event)
+                        // console.log(eventName)
+                        // expect(callback).to.have.been.calledWith(event)
+
+                    // 为了兼容v-model属性，测试用例得这样改
+                    Object.defineProperty(event, 'target', {
+                        value: { value: 'hi' },
+                        enumerable: true
+                    })
                     let inputElement = vm.$el.querySelector('input')
                     inputElement.dispatchEvent(event)
                     console.log(eventName)
-                    expect(callback).to.have.been.calledWith(event)
+                    expect(callback).to.have.been.calledWith('hi')
                 })
             })
             // it('支持 focus 事件', () => {
