@@ -46,7 +46,7 @@ export default {
         // 但是设置负margin会延伸的前提是，该元素不能设置有width属性，width 100%都不行
         // margin: 0 -10px;
         display: flex;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         &.align-left{
             justify-content: flex-start;
         }
