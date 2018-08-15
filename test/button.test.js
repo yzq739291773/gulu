@@ -63,6 +63,7 @@ describe('Button', () => {
         vm.$destroy()
     })
     it('点击 button 触发 click 事件', () => {
+
         const Constructor = Vue.extend(Button)
         const vm = new Constructor({
             propsData: {
@@ -74,6 +75,6 @@ describe('Button', () => {
         vm.$on('click', callback)
         vm.$el.click()
         expect(callback).to.have.been.called
-
+        console.log('button测试完成')
     })
 })

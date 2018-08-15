@@ -84,6 +84,7 @@ describe('Input', () => {
                     inputElement.dispatchEvent(event)
                     console.log(eventName)
                     expect(callback).to.have.been.calledWith('hi')
+                    console.log('input测试完成')
                 })
             })
             // it('支持 focus 事件', () => {
