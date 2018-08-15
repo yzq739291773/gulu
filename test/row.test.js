@@ -32,7 +32,6 @@ describe('Row', () => {
             const cols = vm.$el.querySelectorAll('.col')
             expect(getComputedStyle(cols[0]).paddingRight).to.eq('10px')
             expect(getComputedStyle(cols[1]).paddingLeft).to.eq('10px')
-            console.log(11)
             done()
             vm.$el.remove()
             vm.$destroy()
