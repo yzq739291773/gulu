@@ -24,7 +24,7 @@
         }
         
         #app {
-            margin: 20px;
+            /* margin: 20px; */
         }
         
         body {
@@ -34,30 +34,23 @@
         .box {
             margin: 20px;
         }
-        /* .row {
-            display: inline-flex;
-            flex-wrap: nowrap;
-            width: 100%;
-        }
-        .col {
-            height: 50px;
-            width: 50%;
-            background-color: gray;
-            border: 1px solid red;
-        }
         
-        .col[data-span="2"] {
-            width: 8.333333%;
+        .demo {
+            border: 1px solid #666;
+            min-height: 100px;
         }
-        
-        .col[data-span="22"] {
-            width: 91.666667%;
-        } */
     </style>
 </head>
 
 <body>
     <div id="app">
+        <g-layout style="height: 100vh;">
+            <g-header class="demo">header</g-header>
+            <g-content class="demo">content</g-content>
+            <g-footer class="demo">footer</g-footer>
+        </g-layout>
+    </div>
+    <div id="app1" style="display: none">
         <div class="box" style="border:1px solid black;">
             <!-- 响应式 -->
             <g-row gutter="20">
