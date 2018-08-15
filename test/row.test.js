@@ -50,6 +50,5 @@ describe('Row', () => {
         expect(getComputedStyle(element).justifyContent).to.equal('flex-end')
         div.remove()
         vm.$destroy()
-        console.log('row测试完成')
     })
 })
