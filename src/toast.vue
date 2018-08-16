@@ -3,10 +3,10 @@
 </template>
 
 <script>
-    import Vue from 'vue'
-    Vue.prototype.$toast = function(){
-        console.log('我是toast')
-    }
+    // import Vue from 'vue'
+    // Vue.prototype.$toast = function(){
+    //     console.log('我是toast')
+    // }
     export default {
         name: 'GuluToast'
     }
