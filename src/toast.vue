@@ -45,7 +45,7 @@
                 type:String,
                 default:'top',
                 validator(value){
-                    return ['top', 'middle', 'bottom'].indexOf(value) > 0
+                    return ['top', 'middle', 'bottom'].includes(value)
                 }
             }
         },
@@ -145,7 +145,7 @@
             .toast{
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
-                animation: slide-up .3s;
+                animation: slide-up 1s;
             }
         }
     }
