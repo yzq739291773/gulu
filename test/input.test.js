@@ -82,7 +82,6 @@ describe('Input', () => {
                     })
                     let inputElement = vm.$el.querySelector('input')
                     inputElement.dispatchEvent(event)
-                    console.log(eventName)
                     expect(callback).to.have.been.calledWith('hi')
                 })
             })

@@ -6,15 +6,15 @@ import Col from '../src/col.vue'
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
-describe('Row', () => {
+describe('Col', () => {
     it('存在.', () => {
-        expect(Row).to.be.ok
+        expect(Col).to.be.ok
     })
 
     it('接收 span 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
-        const Constructor = Vue.extend(Row)
+        const Constructor = Vue.extend(Col)
         const vm = new Constructor({
             propsData: {
                 span: 1
@@ -28,7 +28,7 @@ describe('Row', () => {
     it('接收 offset 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
-        const Constructor = Vue.extend(Row)
+        const Constructor = Vue.extend(Col)
         const vm = new Constructor({
             propsData: {
                 offset: 1
@@ -42,7 +42,7 @@ describe('Row', () => {
     it('接收 pc 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
-        const Constructor = Vue.extend(Row)
+        const Constructor = Vue.extend(Col)
         const vm = new Constructor({
             propsData: {
                 pc: { span: 1, offset: 2 }
@@ -57,7 +57,7 @@ describe('Row', () => {
     it('接收 ipad 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
-        const Constructor = Vue.extend(Row)
+        const Constructor = Vue.extend(Col)
         const vm = new Constructor({
             propsData: {
                 ipad: { span: 1, offset: 2 }
@@ -72,7 +72,7 @@ describe('Row', () => {
     it('接收 narrowpc 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
-        const Constructor = Vue.extend(Row)
+        const Constructor = Vue.extend(Col)
         const vm = new Constructor({
             propsData: {
                 narrowPc: { span: 1, offset: 2 }
@@ -87,7 +87,7 @@ describe('Row', () => {
     it('接收 widePC 属性', () => {
         const div = document.createElement('div')
         document.body.appendChild(div)
-        const Constructor = Vue.extend(Row)
+        const Constructor = Vue.extend(Col)
         const vm = new Constructor({
             propsData: {
                 widePc: { span: 1, offset: 2 }
