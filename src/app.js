@@ -37,7 +37,7 @@ new Vue({
 
     },
     created() {
-        this.$toast()
+
     },
     methods: {
         inputChange(e, arg) {
@@ -45,6 +45,9 @@ new Vue({
         },
         myInput(e, arg) {
             console.log(e, arg)
+        },
+        showToast() {
+            this.$toast('我是message')
         }
     }
 })
