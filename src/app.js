@@ -48,7 +48,8 @@ new Vue({
         },
         showToast() {
             this.$toast('卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯', {
-                enableHtml: false
+                enableHtml: false,
+                position: 'middle'
                     // closeButton: {
                     //     text: '我知道了',
                     //     callback: () => {
