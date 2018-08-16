@@ -27,5 +27,45 @@ describe('Toast', () => {
             }, 1500)
         })
 
+        it('接收 closeButton', (done) => {
+            const callback = sinon.fake();
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    closeButton: {
+                        text: '关闭吧',
+                        callback,
+                    }
+                }
+            }).$mount()
+            let closeButton = vm.$el.querySelector('.close')
+            expect(closeButton.textContent.trim()).to.eq('关闭吧')
+            closeButton.click()
+            expect(callback).to.have.been.called
+        })
+
+        it('接收 enableHTML', () => {
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    enableHtml: true
+                }
+            })
+            vm.$slots.default = [`<strong id="test">hi</strong>`]
+            vm.$mount()
+            let strong = vm.$el.querySelector('#test')
+            expect(strong).to.exist
+        })
+
+        it('接收 position', () => {
+            const Constructor = Vue.extend(Toast)
+            const vm = new Constructor({
+                propsData: {
+                    position: 'bottom'
+                }
+            }).$mount()
+            expect(vm.$el.classList.contains('position-bottom')).to.eq(true)
+        })
+
     })
 })
