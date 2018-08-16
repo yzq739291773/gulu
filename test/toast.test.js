@@ -27,7 +27,7 @@ describe('Toast', () => {
             }, 1500)
         })
 
-        it('接收 closeButton', (done) => {
+        it('接收 closeButton', () => {
             const callback = sinon.fake();
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
