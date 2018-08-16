@@ -47,7 +47,15 @@ new Vue({
             console.log(e, arg)
         },
         showToast() {
-            this.$toast('我是message')
+            this.$toast('卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯', {
+                enableHtml: false
+                    // closeButton: {
+                    //     text: '我知道了',
+                    //     callback: () => {
+                    //         console.log('他告诉我他已经知道了')
+                    //     }
+                    // }
+            })
         }
     }
 })
