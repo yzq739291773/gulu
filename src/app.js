@@ -46,10 +46,19 @@ new Vue({
         myInput(e, arg) {
             console.log(e, arg)
         },
-        showToast() {
-            this.$toast('卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯', {
+        showToast1() {
+            this.showToast('top')
+        },
+        showToast2() {
+            this.showToast('middle')
+        },
+        showToast3() {
+            this.showToast('bottom')
+        },
+        showToast(position) {
+            this.$toast('卡萨积分卡洛斯卡萨斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯', {
                 enableHtml: false,
-                position: 'middle'
+                position: position
                     // closeButton: {
                     //     text: '我知道了',
                     //     callback: () => {
