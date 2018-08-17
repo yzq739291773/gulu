@@ -44,13 +44,13 @@ new Vue({
         loading1: false,
         loading2: false,
         loading3: false,
-        message: 'hi'
+        message: 'hi',
+        selectedTab: 'sports'
 
     },
-    created() {
-
-    },
+    created() {},
     methods: {
+
         inputChange(e, arg) {
             console.log(e, arg)
         },

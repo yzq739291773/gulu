@@ -6,7 +6,8 @@
 
 <script>
 export default {
-    name:'GuluTabsPane'
+    name:'GuluTabsPane',
+    
 }
 </script>
 
