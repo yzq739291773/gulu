@@ -32,7 +32,8 @@ export default {
         }
     },
     mounted(){
-        this.$emit('update:selectedTab',this.selected)
+        console.log('tabs组件 触发事件')
+        this.eventBus.$emit('update:selected',this.selected)
     },
     methods:{
     }
