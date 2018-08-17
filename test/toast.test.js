@@ -27,7 +27,7 @@ describe('Toast', () => {
             }, 1500)
         })
 
-        it('接收 closeButton', () => {
+        it('接收 closeButton', (done) => {
             const callback = sinon.fake();
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
@@ -40,8 +40,14 @@ describe('Toast', () => {
             }).$mount()
             let closeButton = vm.$el.querySelector('.close')
             expect(closeButton.textContent.trim()).to.eq('关闭吧')
-            closeButton.click()
-            expect(callback).to.have.been.called
+                // 注意：这里的不加延时偶尔会产生bug,代码里面再读取元素的时候，就被这个吧toast关掉了，所以会报错。
+                // 加上延时，保证代码的正常运行，同时也可以测试
+            setTimeout(() => {
+                closeButton.click()
+                expect(callback).to.have.been.called
+                done()
+            }, 1500)
+
         })
 
         it('接收 enableHTML', () => {
