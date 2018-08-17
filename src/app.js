@@ -50,7 +50,6 @@ new Vue({
     },
     created() {},
     methods: {
-
         inputChange(e, arg) {
             console.log(e, arg)
         },
