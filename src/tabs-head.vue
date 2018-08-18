@@ -17,9 +17,11 @@ export default {
             active:false
         }
     },
-    created(){
-        this.eventBus.$on('update:selected',(item)=>{
-            console.log(item)
+    mounted(){
+        this.eventBus.$on('update:selected',(item, vm)=>{
+            let {width, height, top, left} = vm.$el.getBoundingClientRect()
+            this.$refs.line.style.width = `${width}px`
+            this.$refs.line.style.transform = `translateX(${left}px)`
         })
     },
     methods:{
@@ -42,7 +44,7 @@ export default {
             position: absolute;
             bottom: 0;
             border-bottom: 1px solid $blue;
-            width: 100px;
+            transition: all 250ms;
         }
         .actions-wrapper{
             margin-left: auto;

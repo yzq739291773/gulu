@@ -32,8 +32,15 @@ export default {
         }
     },
     mounted(){
-        console.log('tabs组件 触发事件')
-        this.eventBus.$emit('update:selected',this.selected)
+        this.$children.forEach((vm)=>{
+            if(vm.$options.name === 'GuluTabsHead'){
+                vm.$children.forEach((childrenvm)=>{
+                    if(childrenvm.$options.name === 'GuluTabsItem' && childrenvm.name === this.selected){
+                       this.eventBus.$emit('update:selected',this.selected,childrenvm)
+                    }
+                })
+            }
+        })
     },
     methods:{
     }
