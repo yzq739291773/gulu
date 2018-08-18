@@ -1,5 +1,5 @@
 <template>
-    <div class="tabs-item" @click="onClick" :class="classes">
+    <div class="tabs-item" @click="onClick" :class="classes" :data-name="name">
         <slot></slot>
     </div>
 </template>
@@ -24,15 +24,17 @@ export default {
         }
     },
     created(){
-        this.eventBus.$on('update:selected', (name)=>{
-            if(name === this.name){
-                console.log(`我${this.name}被选中了`)
-                this.active = true
-            }else{
-                console.log(`我${this.name}没被选中了`)
-                this.active = false
-            }
-        })
+        if(this.eventBus){
+            this.eventBus.$on('update:selected', (name)=>{
+                if(name === this.name){
+                    console.log(`我${this.name}被选中了`)
+                    this.active = true
+                }else{
+                    console.log(`我${this.name}没被选中了`)
+                    this.active = false
+                }
+            })
+        }
     },
     computed:{
         classes(){
@@ -48,6 +50,8 @@ export default {
                 return
             }
             this.eventBus.$emit('update:selected',this.name,this)
+            // 为了测试
+            this.$emit('click', this)
         }
     }
 }
@@ -68,6 +72,7 @@ export default {
         }
         &.disabled{
             color: grey;
+            cursor: not-allowed;
         }
     }
 </style>
