@@ -1,9 +1,11 @@
 <template>
     <div class="popover" @click.stop="onClick">
-        <div class="content-rapper" v-if="visible" @click.stop="">
+        <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click.stop="">
             <slot name="content"></slot>
         </div>
-        <slot></slot>
+        <div ref="triggerWrapper">
+            <slot></slot>
+        </div>
     </div>
 </template>
 
@@ -15,12 +17,22 @@ export default {
             visible:false
         }
     },
+    mounted(){
+        
+    },
     methods:{
         onClick(){
             this.visible = !this.visible
             console.log('切换visible')
             if(this.visible == true){
                 this.$nextTick(()=>{
+                    document.body.appendChild(this.$refs.contentWrapper)
+
+                    let {left, top, width, height} = this.$refs.triggerWrapper.getBoundingClientRect()
+                    // pageXOffset是scrollX的别名，前者无兼容性，后者有
+                    this.$refs.contentWrapper.style.left = left + window.pageXOffset+ 'px'
+                    this.$refs.contentWrapper.style.top = top + window.pageYOffset+'px'
+
                     let eventHandler = ()=>{
                         console.log('关闭popover')
                         this.visible = false
@@ -39,13 +51,14 @@ export default {
 <style lang="scss" scoped>
     .popover{
         display: inline-block;
+        vertical-align: top;
         position: relative;
-        .content-rapper{
-            position: absolute;
-            left: 0;
-            bottom: 100%;
-            border: 1px solid red;
-            box-shadow: 0 0 3px black;
-        }
     }
+    .content-wrapper{
+        position: absolute;
+        border: 1px solid red;
+        box-shadow: 0 0 3px black;
+        transform: translateY(-100%);
+    }
+    
 </style>
