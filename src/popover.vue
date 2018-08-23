@@ -1,6 +1,6 @@
 <template>
-    <div class="popover" @click="onClick">
-        <div class="content-rapper" v-if="visible">
+    <div class="popover" @click.stop="onClick">
+        <div class="content-rapper" v-if="visible" @click.stop="">
             <slot name="content"></slot>
         </div>
         <slot></slot>
@@ -18,6 +18,19 @@ export default {
     methods:{
         onClick(){
             this.visible = !this.visible
+            console.log('切换visible')
+            if(this.visible == true){
+                this.$nextTick(()=>{
+                    let eventHandler = ()=>{
+                        console.log('关闭popover')
+                        this.visible = false
+                        console.log('移除监听函数')
+                        document.removeEventListener('click',eventHandler)
+                    }
+                    console.log('绑定监听函数')
+                    document.addEventListener('click',eventHandler)
+                })
+            }
         }
     }
 }
