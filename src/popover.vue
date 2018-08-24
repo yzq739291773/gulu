@@ -21,32 +21,36 @@ export default {
         
     },
     methods:{
+        positionContent(){
+            document.body.appendChild(this.$refs.contentWrapper)
+            let {left, top, width, height} = this.$refs.triggerWrapper.getBoundingClientRect()
+            // pageXOffset是scrollX的别名，前者无兼容性，后者有
+            this.$refs.contentWrapper.style.left = left + window.pageXOffset+ 'px'
+            this.$refs.contentWrapper.style.top = top + window.pageYOffset+'px'
+        },
+        listenToDocument(){
+            let eventHandler = (event)=>{
+                if(this.$refs.contentWrapper&&this.$refs.contentWrapper.contains(event.target)){return}
+                console.log('关闭popover')
+                this.visible = false
+                console.log('移除监听函数')
+                document.removeEventListener('click',eventHandler)
+            }
+            console.log('绑定监听函数')
+            document.addEventListener('click',eventHandler)
+        },
+        onShow(){
+            this.$nextTick(()=>{
+                this.positionContent()
+                this.listenToDocument()
+            })
+        },
         onClick(e){
             if(this.$refs.triggerWrapper.contains(e.target)){
                 this.visible = !this.visible
                 console.log('切换visible')
                 if(this.visible == true){
-                    this.$nextTick(()=>{
-                        document.body.appendChild(this.$refs.contentWrapper)
-
-                        let {left, top, width, height} = this.$refs.triggerWrapper.getBoundingClientRect()
-                        // pageXOffset是scrollX的别名，前者无兼容性，后者有
-                        this.$refs.contentWrapper.style.left = left + window.pageXOffset+ 'px'
-                        this.$refs.contentWrapper.style.top = top + window.pageYOffset+'px'
-
-                        let eventHandler = (event)=>{
-                            if(this.$refs.contentWrapper.contains(event.target)){
-
-                            }else{
-                                console.log('关闭popover')
-                                this.visible = false
-                                console.log('移除监听函数')
-                                document.removeEventListener('click',eventHandler)
-                            }
-                        }
-                        console.log('绑定监听函数')
-                        document.addEventListener('click',eventHandler)
-                    })
+                   this.onShow()
                 }
             }else{
 
