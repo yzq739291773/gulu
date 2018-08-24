@@ -1,5 +1,5 @@
 <template>
-    <div class="popover" @click="onClick">
+    <div class="popover" @click="onClick" ref="popover">
         <div ref="contentWrapper" class="content-wrapper" v-if="visible" @click="">
             <slot name="content"></slot>
         </div>
@@ -28,29 +28,30 @@ export default {
             this.$refs.contentWrapper.style.left = left + window.pageXOffset+ 'px'
             this.$refs.contentWrapper.style.top = top + window.pageYOffset+'px'
         },
-        listenToDocument(){
-            let eventHandler = (event)=>{
-                if(this.$refs.contentWrapper&&this.$refs.contentWrapper.contains(event.target)){return}
-                console.log('关闭popover')
-                this.visible = false
-                console.log('移除监听函数')
-                document.removeEventListener('click',eventHandler)
-            }
-            console.log('绑定监听函数')
-            document.addEventListener('click',eventHandler)
+        onClickDocument(event){
+            if(
+                this.$refs.popover&& 
+                (this.$refs.popover == event.target || this.$refs.popover.contains(event.target))
+            ){return}
+            this.close()
         },
-        onShow(){
+        open(){
+            this.visible = true
             this.$nextTick(()=>{
                 this.positionContent()
-                this.listenToDocument()
+                document.addEventListener('click',this.onClickDocument)
             })
+        },
+        close(){
+            this.visible = false;
+           document.removeEventListener('click',this.onClickDocument)
         },
         onClick(e){
             if(this.$refs.triggerWrapper.contains(e.target)){
-                this.visible = !this.visible
-                console.log('切换visible')
                 if(this.visible == true){
-                   this.onShow()
+                   this.close()
+                }else{
+                    this.open()
                 }
             }else{
 
