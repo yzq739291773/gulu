@@ -52,7 +52,7 @@ new Vue({
         loading3: false,
         message: 'hi',
         selectedTab: 'sports',
-        selectTab: '2'
+        selectTab: ['2']
 
     },
     created() {},
