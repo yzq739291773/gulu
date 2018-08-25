@@ -8,9 +8,17 @@
 import Vue from 'vue'
 export default {
     name:"GuluCollapse",
+    props:{
+        single:{
+            type:Boolean,
+            default:false
+        }
+    },
     provide(){
-        return{
-            eventBus:this.eventBus
+        if(this.single){
+            return{
+                eventBus:this.eventBus
+            }
         }
     },
     data(){
