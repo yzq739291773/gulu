@@ -40,7 +40,7 @@ Vue.component('g-tabs-item', TabsItem)
 Vue.component('g-tabs-pane', TabsPane)
 Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
-Vue.component('g-collapseItem', CollapseItem)
+Vue.component('g-collapseitem', CollapseItem)
 
 Vue.use(plugin)
 
