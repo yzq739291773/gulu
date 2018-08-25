@@ -1,7 +1,7 @@
 <template>
     
     <div class="collapseItem">
-        <div class="title" @click="open=!open">
+        <div class="title" @click="toggle">
             {{title}}
         </div>
         <div class="content" v-if="open">
@@ -19,12 +19,31 @@ export default {
             required:true
         }
     },
+    inject:['eventBus'],
     data(){
         return{
             open:false
         }
     },
+    mounted(){
+        this.eventBus.$on('update:selected',(vm)=>{
+            if(vm !== this){
+                this.close()
+            }
+        })
+    },
     methods:{
+        toggle(){
+            if(this.open === true){
+                this.open =false
+            }else{
+                this.open = true
+                this.eventBus.$emit('update:selected',this)
+            }
+        },
+        close(){
+            this.open = false
+        }
     }
 }
 </script>
