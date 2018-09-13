@@ -1,4 +1,5 @@
 module.exports = {
+    base: '/gulu/',
     title: 'Face UI',
     description: 'Just playing around',
     themeConfig: {
