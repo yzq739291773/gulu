@@ -59,19 +59,19 @@ new Vue({
                 name: '浙江',
                 children: [{
                         name: '杭州',
-                        children: [{
-                            name: '上城',
-                            name: '下城',
-                            name: '江干'
-                        }]
+                        children: [
+                            { name: '上城' },
+                            { name: '下城' },
+                            { name: '江干' }
+                        ]
                     },
                     {
                         name: '嘉兴',
-                        children: [{
-                            name: '南湖',
-                            name: '秀洲',
-                            name: '嘉善',
-                        }]
+                        children: [
+                            { name: '南湖' },
+                            { name: '秀洲' },
+                            { name: '嘉善' }
+                        ]
                     }
                 ]
             },
