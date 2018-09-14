@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'var.scss'
+@import 'var.scss';
     .wrapper{
         font-size: $font-size;
         display: inline-flex;
