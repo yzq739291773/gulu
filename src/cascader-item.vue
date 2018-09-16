@@ -1,23 +1,31 @@
 <template>
-    <div class="cascaderItem">
+    <div class="cascaderItem" :style="{height:height}">
         <div class="left">
                 <div class="label" v-for="item in items"
                 @click="leftSelected = item">
                     {{item.name}}
+                    <g-icon class="icon" v-if="item.children" name="right"></g-icon>
                 </div>
         </div>
         <div class="right"  v-if="rightItems">
-                <gulu-cascader-item :items="rightItems"></gulu-cascader-item>
+                <gulu-cascader-item :items="rightItems" :height="height"></gulu-cascader-item>
         </div>
     </div>
 </template>
 
 <script>
+import Icon from './icon.vue';
 export default {
     name:'GuluCascaderItem',
+    components:{
+        'g-icon':Icon
+    },
     props:{
         items:{
             type:Array
+        },
+        height:{
+            type:String
         }
     },
     data(){
@@ -39,15 +47,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'var.scss';
     .cascaderItem {
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
+        height: 100px;
         .left{
-            border: 1px solid red;
+            height: 100%;
+            padding-top: .3em;
+            .icon{
+                transform: scale(0.5)
+            }
         }
         .right{
-            margin-top: -1px;
+            
+            height: 100%;
+            border-left: 1px solid $border-color-light;
+        }
+        .label{
+            padding: .3em 1em;
         }
     }
 </style>
