@@ -1,7 +1,5 @@
 <template>
     <div class="cascaderItem" :style="{height:height}">
-        <div>selected:{{selected && selected[level] && selected[level].name}}</div>
-        <div>level:{{level}}</div>
         <div class="left">
             <div class="label" v-for="item in items" @click="onClickTab(item)">
                 {{item.name}}
@@ -47,7 +45,6 @@ export default {
     },
     data(){
         return{
-            leftSelected:null
         }
     },
     computed:{
@@ -60,12 +57,6 @@ export default {
             }else{
                 return null
             }
-            // console.log('leftSelected',this.leftSelected)
-            // if(this.leftSelected && this.leftSelected.children){
-            //     return this.leftSelected.children
-            // }else{
-            //     return null
-            // }
         }
     },
     methods:{
@@ -75,11 +66,7 @@ export default {
             // 2.数组这种数据直接修改后，vue是捕捉不到他的修改的，自然不会渲染dom,因此需要拷贝
             let copy = JSON.parse(JSON.stringify(this.selected))
             copy[this.level] = item
-
-            // console.log('level',this.level)
-            // copy.splice(this.level+1)
-            // console.log('copy',copy)
-
+            copy.splice(this.level+1)
             this.$emit('update:selected',copy)
         },
         onUpdateSelected(newSelected){
@@ -90,7 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'var.scss';
+    @import 'var.scss';
     .cascaderItem {
         display: flex;
         align-items: flex-start;
