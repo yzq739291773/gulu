@@ -1,8 +1,13 @@
 <template>
   <div id="app">
     <div id="app" style="padding:100px;">
+        {{selected}}
         <h1>cascader</h1>
-        <g-cascader height="200px" :source="source"></g-cascader>
+        <g-cascader
+            height="200px" 
+            :source="source"
+            :selected="selected"
+            @update:selected="selected = $event"></g-cascader>
         <h2>kjdskfjks</h2>
     </div>
     <!-- <div id="app6" style="padding:100px; display:none">
@@ -196,6 +201,7 @@ export default {
             message: 'hi',
             selectedTab: 'sports',
             selectTab: ['2'],
+            selected:[],
             source: [{
                     name: '浙江',
                     children: [{

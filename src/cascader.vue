@@ -1,10 +1,15 @@
 <template>
     <div class="cascader">
         <div class="trigger" @click="popoverVisible = !popoverVisible">
-           
+           {{result}}
         </div>
         <div class="popover-wrapper" v-if="popoverVisible">
-            <cascaderItem :height="height" :items="source" class="popover" ></cascaderItem>
+            <gulu-cascader-item 
+                :height="height" 
+                :items="source"
+                :selected="selected"
+                @update:selected="onUpdateSelected"
+                class="popover" ></gulu-cascader-item>
         </div>
     </div>
 </template>
@@ -14,7 +19,7 @@ import cascaderItem from './cascader-item.vue'
 export default {
     name:'GuluCascader',
     components:{
-        cascaderItem
+        'GuluCascaderItem':cascaderItem
     },
     props:{
         source:{
@@ -22,6 +27,10 @@ export default {
         },
         height:{
             type:String
+        },
+        selected:{
+            type:Array,
+            default:()=>{return []}
         }
     },
     data(){
@@ -30,6 +39,14 @@ export default {
         }
     },
     computed:{
+        result(){
+            return this.selected.map(item=>item.name).join('/')
+        }
+    },
+    methods:{
+        onUpdateSelected(newSelected){
+            this.$emit('update:selected',newSelected)
+        }
     }
 
 }

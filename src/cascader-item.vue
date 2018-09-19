@@ -1,14 +1,21 @@
 <template>
     <div class="cascaderItem" :style="{height:height}">
+        <div>selected:{{selected && selected[level] && selected[level].name}}</div>
+        <div>level:{{level}}</div>
         <div class="left">
-                <div class="label" v-for="item in items"
-                @click="leftSelected = item">
-                    {{item.name}}
-                    <g-icon class="icon" v-if="item.children" name="right"></g-icon>
-                </div>
+            <div class="label" v-for="item in items" @click="onClickTab(item)">
+                {{item.name}}
+                <g-icon class="icon" v-if="item.children" name="right"></g-icon>
+            </div>
         </div>
         <div class="right"  v-if="rightItems">
-                <gulu-cascader-item :items="rightItems" :height="height"></gulu-cascader-item>
+            <gulu-cascader-item 
+                ref="right"
+                :items="rightItems" 
+                :height="height"
+                :selected="selected"
+                @update:selected="onUpdateSelected"
+                :level="level + 1"></gulu-cascader-item>
         </div>
     </div>
 </template>
@@ -26,6 +33,16 @@ export default {
         },
         height:{
             type:String
+        },
+        selected:{
+            type:Array,
+            default:()=>{
+                return []
+            }
+        },
+        level:{
+            type:Number,
+            default:0
         }
     },
     data(){
@@ -35,12 +52,38 @@ export default {
     },
     computed:{
         rightItems(){
-            if(this.leftSelected && this.leftSelected.children){
-                console.log(11,this.leftSelected.children)
-                return this.leftSelected.children
+            console.log('rightItems',this.level)
+            let currentSelected = this.selected[this.level]
+            console.log('currentSelected', currentSelected)
+            if(currentSelected && currentSelected.children){
+                return currentSelected.children
             }else{
                 return null
             }
+            // console.log('leftSelected',this.leftSelected)
+            // if(this.leftSelected && this.leftSelected.children){
+            //     return this.leftSelected.children
+            // }else{
+            //     return null
+            // }
+        }
+    },
+    methods:{
+        onClickTab(item){
+            // console.log('item',item)
+            // 1.子组件不能直接修改props
+            // 2.数组这种数据直接修改后，vue是捕捉不到他的修改的，自然不会渲染dom,因此需要拷贝
+            let copy = JSON.parse(JSON.stringify(this.selected))
+            copy[this.level] = item
+
+            // console.log('level',this.level)
+            // copy.splice(this.level+1)
+            // console.log('copy',copy)
+
+            this.$emit('update:selected',copy)
+        },
+        onUpdateSelected(newSelected){
+            this.$emit('update:selected',newSelected)
         }
     }
 }
