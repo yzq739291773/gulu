@@ -6,8 +6,7 @@
         <g-cascader
             height="200px" 
             :source="source"
-            :selected="selected"
-            @update:selected="selected = $event"></g-cascader>
+            :selected.sync="selected"></g-cascader>
         <h2>kjdskfjks</h2>
     </div>
     <!-- <div id="app6" style="padding:100px; display:none">
