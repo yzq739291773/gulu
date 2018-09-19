@@ -1,7 +1,7 @@
 <template>
     <div class="cascader">
         <div class="trigger" @click="popoverVisible = !popoverVisible">
-           {{result}}
+           {{result || '&nbsp;'}}
         </div>
         <div class="popover-wrapper" v-if="popoverVisible">
             <gulu-cascader-item 
@@ -57,9 +57,14 @@ export default {
     .cascader{
         position: relative;
         .trigger{
-            border: 1px solid black;
-            height: 32px;
+            border: 1px solid $border-color;
+            height: $button-height;
+            display: inline-flex;
+            align-items: center;
+            padding: 0 1em;
+            min-width: 10em;
             width: 200px;
+            border-radius: $border-radius;
         }
         .popover-wrapper{
             position: absolute;
@@ -67,6 +72,7 @@ export default {
             left: 0;
             background: white;
             display: flex;
+            margin-top: 4px;
             .popover{
                 @extend %box-shadow
             }
