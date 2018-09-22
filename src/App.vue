@@ -5,7 +5,8 @@
         <h1>cascader</h1>
         <g-cascader
             height="200px" 
-            :source="source"
+            :source.sync="source"
+            :loadData="loadData"
             :selected.sync="selected"></g-cascader>
         <h2>kjdskfjks</h2>
     </div>
@@ -186,11 +187,28 @@
 
 <script>
 import Cascader from './cascader.vue'
+import db from './db.js'
+
+function ajax(parentId = 0){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            let result = db.filter((item)=>{
+                return item.parent_id === parentId
+            })
+            resolve(result)
+        },1000)
+    })
+}
 
 export default {
   name: 'app',
   components: {
     'g-cascader':Cascader
+  },
+  created(){
+      ajax(0).then((result)=>{
+          this.source = result
+      })
   },
   data(){
     return({
@@ -201,42 +219,61 @@ export default {
             selectedTab: 'sports',
             selectTab: ['2'],
             selected:[],
-            source: [{
-                    name: '浙江',
-                    children: [{
-                            name: '杭州',
-                            children: [
-                                { name: '上城' },
-                                { name: '下城' },
-                                { name: '江干' }
-                            ]
-                        },
-                        {
-                            name: '嘉兴',
-                            children: [
-                                { name: '南湖' },
-                                { name: '秀洲' },
-                                { name: '嘉善' }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    name: '福建',
-                    children: [{
-                        name: '福州',
-                        children: [{
-                            name: '鼓楼',
-                            name: '台江',
-                            name: '仓山'
-                        }]
-                    }]
-                }
-            ]
+            source:[],
+            // source: [{
+            //         name: '浙江',
+            //         children: [{
+            //                 name: '杭州',
+            //                 children: [
+            //                     { name: '上城' },
+            //                     { name: '下城' },
+            //                     { name: '江干' }
+            //                 ]
+            //             },
+            //             {
+            //                 name: '嘉兴',
+            //                 children: [
+            //                     { name: '南湖' },
+            //                     { name: '秀洲' },
+            //                     { name: '嘉善' }
+            //                 ]
+            //             }
+            //         ]
+            //     },
+            //     {
+            //         name: '福建',
+            //         children: [{
+            //             name: '福州',
+            //             children: [{
+            //                 name: '鼓楼',
+            //                 name: '台江',
+            //                 name: '仓山'
+            //             }]
+            //         }]
+            //     }
+            // ]
 
         })
   },
     methods: {
+        loadData(node, updateSource){
+            let {name, id, parent_id} = node
+            ajax(id).then(result =>{
+                updateSource(result)
+            })
+        },
+        xxx(){
+            setTimeout(()=>{
+                ajax(this.selected[0].id).then(result=>{
+                    let lastLevelSelected = this.source.filter((item)=>{
+                        return item.id == this.selected[0].id
+                    })[0]
+                    this.$set(lastLevelSelected,'children',result)
+                })
+            },0)
+            
+            
+        },
         inputChange(e, arg) {
             console.log(e, arg)
         },

@@ -49,19 +49,24 @@ export default {
     },
     computed:{
         rightItems(){
-            console.log('rightItems',this.level)
-            let currentSelected = this.selected[this.level]
-            console.log('currentSelected', currentSelected)
-            if(currentSelected && currentSelected.children){
-                return currentSelected.children
-            }else{
-                return null
+            if(this.selected[this.level]){
+                let selected = this.items.filter(item =>{
+                    item.name === this.selected[this.level].name
+                })
+                if(selected && selected[0].children &&selected[0].children.length>0){
+                    return selected[0].children
+                }
             }
+            // let currentSelected = this.selected[this.level]
+            // if(currentSelected && currentSelected.children){
+            //     return currentSelected.children
+            // }else{
+            //     return null
+            // }
         }
     },
     methods:{
         onClickTab(item){
-            // console.log('item',item)
             // 1.子组件不能直接修改props
             // 2.数组这种数据直接修改后，vue是捕捉不到他的修改的，自然不会渲染dom,因此需要拷贝
             let copy = JSON.parse(JSON.stringify(this.selected))
@@ -86,6 +91,7 @@ export default {
         .left{
             height: 100%;
             padding-top: .3em;
+            overflow: auto;
             .icon{
                 transform: scale(0.5)
             }
