@@ -361,8 +361,8 @@ export default {
             min-height: 100px;
         }
         .box{
-            width: 200px;
-            height: 150px;
+            width: 100%;
+            height: 300px;
             background-color: #ddd;
             border: 1px solid red;
         }

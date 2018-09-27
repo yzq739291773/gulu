@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss" scoped>
     .g-slides{
-        display: inline-block;
+        // display: inline-block;
         border: 1px solid black;
         .g-slides-window{
             overflow: hidden;
