@@ -1,6 +1,19 @@
 <template>
   <div id="app">
-    <div id="app" style="padding:100px;">
+      <div class="app" style="padding:100px;">
+          <g-slides :selected='selected'>
+              <g-slides-item name="1">
+                  <div class="box">1</div>
+              </g-slides-item>
+              <g-slides-item name="2">
+                  <div class="box">2</div>
+              </g-slides-item>
+              <g-slides-item name="3">
+                  <div class="box">3</div>
+              </g-slides-item>
+          </g-slides>
+      </div>
+    <!-- <div class="app7" style="padding:100px;">
         {{selected}}
         <h1>cascader</h1>
         <g-cascader
@@ -9,7 +22,7 @@
             :loadData="loadData"
             :selected.sync="selected"></g-cascader>
         <h2>kjdskfjks</h2>
-    </div>
+    </div> -->
     <!-- <div id="app6" style="padding:100px; display:none">
         <g-button>默认按钮</g-button>
         <g-collapse :selected.sync="selectTab ">
@@ -187,6 +200,8 @@
 
 <script>
 import Cascader from './cascader.vue'
+import Slides from './slides.vue'
+import SlidesItem from './slides-item.vue'
 import db from './db.js'
 
 function ajax(parentId = 0){
@@ -203,23 +218,35 @@ function ajax(parentId = 0){
 export default {
   name: 'app',
   components: {
-    'g-cascader':Cascader
+    'g-cascader':Cascader,
+    'g-slides':Slides,
+    'g-slides-item':SlidesItem
   },
   created(){
-      ajax(0).then((result)=>{
-          this.source = result
-      })
+
+    //   ajax(0).then((result)=>{
+    //       this.source = result
+    //   })
+    let n = 1
+    setInterval(()=>{
+        if(n == 4){
+            n = 1
+        }
+        console.log('3秒时间到了')
+        this.selected = n.toString()
+        n++
+    },3000)
   },
   data(){
     return({
-            loading1: false,
-            loading2: false,
-            loading3: false,
-            message: 'hi',
-            selectedTab: 'sports',
-            selectTab: ['2'],
-            selected:[],
-            source:[],
+            // loading1: false,
+            // loading2: false,
+            // loading3: false,
+            // message: 'hi',
+            // selectedTab: 'sports',
+            // selectTab: ['2'],
+            // selected:[],
+            // source:[],
             // source: [{
             //         name: '浙江',
             //         children: [{
@@ -252,6 +279,7 @@ export default {
             //         }]
             //     }
             // ]
+            selected:'1'
 
         })
   },
@@ -332,12 +360,18 @@ export default {
             font-size: var(--font-size);
         }
         
-        .box {
-            margin: 20px;
-        }
+        // .box {
+        //     margin: 20px;
+        // }
         
         .demo {
             border: 1px solid #666;
             min-height: 100px;
+        }
+        .box{
+            width: 200px;
+            height: 150px;
+            background-color: #ddd;
+            border: 1px solid red;
         }
 </style>
