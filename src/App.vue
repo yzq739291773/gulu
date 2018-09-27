@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <div class="app" style="padding:100px;">
-          <g-slides :selected='selected'>
+          <g-slides :selected.sync='selected'>
               <g-slides-item name="1">
                   <div class="box">1</div>
               </g-slides-item>
@@ -227,15 +227,7 @@ export default {
     //   ajax(0).then((result)=>{
     //       this.source = result
     //   })
-    let n = 1
-    setInterval(()=>{
-        if(n == 4){
-            n = 1
-        }
-        console.log('3秒时间到了')
-        this.selected = n.toString()
-        n++
-    },3000)
+    
   },
   data(){
     return({
