@@ -1,14 +1,16 @@
 <template>
     <div class="g-slides" 
         @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave">
+        @mouseleave="onMouseLeave"
+        @touchstart="onTouchStart"
+        @touchmove="onTouchMove"
+        @touchend="onTouchEnd">
         <div class="g-slides-window" ref="window">
             <div class="g-slides-wrapper">
                 <slot></slot>
             </div>
         </div>
         <div class="g-slides-dots">
-            <!-- {{selectedIndex}} -->
             <span v-for="n in childrenLength" 
                 :class="{active:selectedIndex == n-1}"
                 @click="select(n-1)" >
@@ -34,7 +36,8 @@ export default {
         return{
             childrenLength:0,
             lastSelectedIndex:undefined,
-            timerId:undefined
+            timerId:undefined,
+            startTouch:undefined
         }
     },
     mounted(){
@@ -44,7 +47,8 @@ export default {
     },
     computed:{
         selectedIndex(){
-            return this.names.indexOf(this.selected) || 0
+            let index =  this.names.indexOf(this.selected)
+            return index == -1 ? 0 :index
         },
         names(){
             return this.$children.map((vm)=>vm.name)
@@ -54,6 +58,31 @@ export default {
         this.updateChildren()
     },
     methods:{
+        onTouchStart(e){
+            this.pause()
+            this.startTouch = e.touches[0]
+        },
+        onTouchMove(e){
+        },
+        onTouchEnd(e){
+            let endTouch = e.changedTouches[0]
+            let {clientX:x1, clientY:y1} = this.startTouch
+            let {clientX:x2, clientY:y2} = endTouch
+
+            let distance = Math.sqrt(Math.pow(x2-x1,2) + Math.pow(y2-y1,2))
+            let deltaY = Math.abs(y2-y1)
+            let rate = distance / deltaY
+            if(rate > 2){
+                if(x2>x1){
+                    this.select(this.selectedIndex -1)
+                }else{
+                    this.select(this.selectedIndex + 1)
+                }
+            }
+            this.$nextTick(()=>{
+                this.playAutomatically()
+            })
+        },
         onMouseEnter(){
             this.pause()
         },
@@ -65,10 +94,6 @@ export default {
             let run= ()=>{
                 let index = this.names.indexOf(this.getSelected())
                 let newIndex = index + 1;
-                if(newIndex === -1){
-                    newIndex = this.names.length - 1
-                }
-                if(newIndex === this.names.length){newIndex = 0}
                 this.select(newIndex)
                 this.timerId = setTimeout(run, 2000)
             }
@@ -78,9 +103,12 @@ export default {
             window.clearTimeout(this.timerId)
             this.timerId = undefined
         },
-        select(index){
+        select(newIndex){
             this.lastSelectedIndex = this.selectedIndex
-            this.$emit('update:selected',this.names[index])
+            if(newIndex === -1){newIndex = this.names.length - 1}
+            if(newIndex === this.names.length){newIndex = 0}
+            
+            this.$emit('update:selected',this.names[newIndex])
         },
         getSelected(){
             let first = this.$children[0]
