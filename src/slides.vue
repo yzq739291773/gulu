@@ -1,11 +1,13 @@
 <template>
-    <div class="g-slides">
+    <div class="g-slides" 
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave">
         <div class="g-slides-window" ref="window">
             <div class="g-slides-wrapper">
                 <slot></slot>
             </div>
         </div>
-        <div>
+        <div class="g-slides-dots">
             <!-- {{selectedIndex}} -->
             <span v-for="n in childrenLength" 
                 :class="{active:selectedIndex == n-1}"
@@ -31,7 +33,8 @@ export default {
     data(){
         return{
             childrenLength:0,
-            lastSelectedIndex:undefined
+            lastSelectedIndex:undefined,
+            timerId:undefined
         }
     },
     mounted(){
@@ -51,7 +54,14 @@ export default {
         this.updateChildren()
     },
     methods:{
+        onMouseEnter(){
+            this.pause()
+        },
+        onMouseLeave(){
+            this.playAutomatically()
+        },
         playAutomatically(){
+            if(this.timerId){return}
             let run= ()=>{
                 let index = this.names.indexOf(this.getSelected())
                 let newIndex = index - 1;
@@ -60,9 +70,13 @@ export default {
                 }
                 if(newIndex === this.names.length){newIndex = 1}
                 this.select(newIndex)
-                setTimeout(run, 3000)
+                this.timerId = setTimeout(run, 1000)
             }
-            setTimeout(run, 3000)
+            this.timerId = setTimeout(run, 1000)
+        },
+        pause(){
+            window.clearTimeout(this.timerId)
+            this.timerId = undefined
         },
         select(index){
             this.lastSelectedIndex = this.selectedIndex
@@ -75,7 +89,14 @@ export default {
         updateChildren(){
             let selected = this.getSelected()
             this.$children.forEach((vm)=>{
-                vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false :true
+                let reverse  = this.selectedIndex > this.lastSelectedIndex ? false :true
+                if(this.lastSelectedIndex === this.$children.length -1 && this.selectedIndex === 0){
+                    reverse = false
+                }
+                if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1){
+                    reverse = true
+                }
+                vm.reverse = reverse
                 this.$nextTick(()=>{
                     vm.selected = selected
                 })
@@ -92,6 +113,11 @@ export default {
             overflow: hidden;
             .g-slides-wrapper{
                 position: relative;
+            }
+        }
+        .g-slides-dots{
+            .active{
+                background-color: red;
             }
         }
         
