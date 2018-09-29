@@ -31,6 +31,7 @@ export default {
     data(){
         return{
             childrenLength:0,
+            lastSelectedIndex:undefined
         }
     },
     mounted(){
@@ -58,12 +59,13 @@ export default {
                     newIndex = this.names.length - 1
                 }
                 if(newIndex === this.names.length){newIndex = 1}
-                this.$emit('update:selected',this.names[newIndex])
+                this.select(newIndex)
                 setTimeout(run, 3000)
             }
             setTimeout(run, 3000)
         },
         select(index){
+            this.lastSelectedIndex = this.selectedIndex
             this.$emit('update:selected',this.names[index])
         },
         getSelected(){
@@ -73,10 +75,10 @@ export default {
         updateChildren(){
             let selected = this.getSelected()
             this.$children.forEach((vm)=>{
-                vm.selected = selected
-                let newIndex = this.names.indexOf(selected)
-                let oldIndex = this.names.indexOf(vm.name)
-                // vm.reverse = newIndex > oldIndex ? false :true
+                vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false :true
+                this.$nextTick(()=>{
+                    vm.selected = selected
+                })
             })
         }
     }
@@ -85,7 +87,6 @@ export default {
 
 <style lang="scss" scoped>
     .g-slides{
-        // display: inline-block;
         border: 1px solid black;
         .g-slides-window{
             overflow: hidden;
