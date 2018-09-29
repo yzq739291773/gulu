@@ -64,15 +64,15 @@ export default {
             if(this.timerId){return}
             let run= ()=>{
                 let index = this.names.indexOf(this.getSelected())
-                let newIndex = index - 1;
+                let newIndex = index + 1;
                 if(newIndex === -1){
                     newIndex = this.names.length - 1
                 }
-                if(newIndex === this.names.length){newIndex = 1}
+                if(newIndex === this.names.length){newIndex = 0}
                 this.select(newIndex)
-                this.timerId = setTimeout(run, 1000)
+                this.timerId = setTimeout(run, 2000)
             }
-            this.timerId = setTimeout(run, 1000)
+            this.timerId = setTimeout(run, 2000)
         },
         pause(){
             window.clearTimeout(this.timerId)
@@ -90,11 +90,13 @@ export default {
             let selected = this.getSelected()
             this.$children.forEach((vm)=>{
                 let reverse  = this.selectedIndex > this.lastSelectedIndex ? false :true
-                if(this.lastSelectedIndex === this.$children.length -1 && this.selectedIndex === 0){
-                    reverse = false
-                }
-                if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1){
-                    reverse = true
+                if(this.timerId){
+                    if(this.lastSelectedIndex === this.$children.length -1 && this.selectedIndex === 0){
+                        reverse = false
+                    }
+                    if(this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1){
+                        reverse = true
+                    }
                 }
                 vm.reverse = reverse
                 this.$nextTick(()=>{
@@ -108,7 +110,6 @@ export default {
 
 <style lang="scss" scoped>
     .g-slides{
-        border: 1px solid black;
         .g-slides-window{
             overflow: hidden;
             .g-slides-wrapper{
@@ -116,9 +117,32 @@ export default {
             }
         }
         .g-slides-dots{
-            .active{
-                background-color: red;
+            padding: 8px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span{
+                width: 20px;
+                height: 20px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                background-color: #ddd;
+                border-radius: 50%;
+                margin: 0 8px;
+                font-size: 12px;
+                &:hover{
+                    cursor: pointer;
+                }
+                &.active{
+                    background-color: black;
+                    color: white;
+                    &:hover{
+                        cursor: default;
+                    }
+                }
             }
+            
         }
         
     }

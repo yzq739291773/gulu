@@ -300,10 +300,6 @@ export default {
             font-size: var(--font-size);
         }
         
-        // .box {
-        //     margin: 20px;
-        // }
-        
         .demo {
             border: 1px solid #666;
             min-height: 100px;
@@ -312,6 +308,9 @@ export default {
             width: 100%;
             height: 300px;
             background-color: #ddd;
-            border: 1px solid red;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
         }
 </style>
