@@ -204,16 +204,16 @@ import Slides from './slides.vue'
 import SlidesItem from './slides-item.vue'
 import db from './db.js'
 
-function ajax(parentId = 0){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            let result = db.filter((item)=>{
-                return item.parent_id === parentId
-            })
-            resolve(result)
-        },1000)
-    })
-}
+// function ajax(parentId = 0){
+//     return new Promise((resolve,reject)=>{
+//         setTimeout(()=>{
+//             let result = db.filter((item)=>{
+//                 return item.parent_id === parentId
+//             })
+//             resolve(result)
+//         },1000)
+//     })
+// }
 
 export default {
   name: 'app',
@@ -231,14 +231,6 @@ export default {
   },
   data(){
     return({
-            // loading1: false,
-            // loading2: false,
-            // loading3: false,
-            // message: 'hi',
-            // selectedTab: 'sports',
-            // selectTab: ['2'],
-            // selected:[],
-            // source:[],
             // source: [{
             //         name: '浙江',
             //         children: [{
@@ -276,51 +268,7 @@ export default {
         })
   },
     methods: {
-        loadData(node, updateSource){
-            let {name, id, parent_id} = node
-            ajax(id).then(result =>{
-                updateSource(result)
-            })
-        },
-        xxx(){
-            setTimeout(()=>{
-                ajax(this.selected[0].id).then(result=>{
-                    let lastLevelSelected = this.source.filter((item)=>{
-                        return item.id == this.selected[0].id
-                    })[0]
-                    this.$set(lastLevelSelected,'children',result)
-                })
-            },0)
-            
-            
-        },
-        inputChange(e, arg) {
-            console.log(e, arg)
-        },
-        myInput(e, arg) {
-            console.log(e, arg)
-        },
-        showToast1() {
-            this.showToast('top')
-        },
-        showToast2() {
-            this.showToast('middle')
-        },
-        showToast3() {
-            this.showToast('bottom')
-        },
-        showToast(position) {
-            this.$toast('卡萨积分卡洛斯卡萨斯卡萨积分卡洛斯卡萨积分卡洛斯卡萨积分卡洛斯', {
-                enableHtml: false,
-                position: position
-                    // closeButton: {
-                    //     text: '我知道了',
-                    //     callback: () => {
-                    //         console.log('他告诉我他已经知道了')
-                    //     }
-                    // }
-            })
-        }
+       
     }
 }
 </script>

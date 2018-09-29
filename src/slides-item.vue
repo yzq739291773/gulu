@@ -1,6 +1,6 @@
 <template>
-    <transition name="slide" :classes="{reverse}">
-        <div class="g-slides-item" v-if="visible">
+    <transition name="slide" >
+        <div class="g-slides-item" v-if="visible" :class="{reverse}">
             <slot></slot>
         </div>
     </transition>
