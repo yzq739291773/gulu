@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import Gicon from '../icon.vue'
+import Gicon from '../icon/icon.vue'
 export default {
     name:'GuluSlides',
     components:{
