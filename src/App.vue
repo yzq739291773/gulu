@@ -200,8 +200,8 @@
 
 <script>
 import Cascader from './cascader/cascader.vue'
-import Slides from './slides.vue'
-import SlidesItem from './slides-item.vue'
+import Slides from './slides/slides.vue'
+import SlidesItem from './slides/slides-item.vue'
 import db from '../tests/fixtures/db.js'
 
 // function ajax(parentId = 0){
