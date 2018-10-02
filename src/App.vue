@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <<div class="app8" style="padding:100px;">
+      <!-- <div class="app8" style="padding:100px;">
           <g-slides :selected.sync='selected'>
               <g-slides-item name="1">
                   <div class="box">1</div>
@@ -12,7 +12,7 @@
                   <div class="box">3</div>
               </g-slides-item>
           </g-slides>
-      </div>
+      </div> -->
     <!-- <div class="app" style="padding:100px;">
         {{selected}}
         <h1>cascader</h1>
