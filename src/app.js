@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Button from './button/button.vue'
-import Icon from './icon.vue'
+import Icon from './icon/icon.vue'
 import ButtonGroup from './button/button-group.vue'
 import Input from './input/input.vue'
 import Row from './grid/row.vue'
