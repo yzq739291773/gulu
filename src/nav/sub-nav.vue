@@ -24,6 +24,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+    @import 'var';
     .g-sub-nav{
         position: relative;
         span{
@@ -31,11 +32,16 @@ export default {
             display: block;
         }
         .g-sub-nav-popover{
+            background-color: white;
             position: absolute;
             top: 100%;
             left: 0;
-            border: 1px solid red;
+            margin-top: 4px;
             white-space: nowrap;
+            box-shadow: 0 0 3px fade-out($color: black, $amount: 0.8);
+            font-size: $font-size;
+            color: $light-color;
+            min-width: 8em;
         }
     }
     .g-sub-nav .g-sub-nav .g-sub-nav-popover{
