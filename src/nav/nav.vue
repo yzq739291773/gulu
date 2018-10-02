@@ -6,7 +6,17 @@
 
 <script>
 export default {
-    name:'GuluNav'
+    name:'GuluNav',
+    props:{
+        selected:{
+            type:Array,
+            default:()=>[]
+        },
+        multiple:{
+            type:Boolean,
+            default:false
+        }
+    }
 }
 </script>
 
