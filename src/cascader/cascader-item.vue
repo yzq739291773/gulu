@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Icon from './icon.vue';
+import Icon from '../icon.vue';
 export default {
     name:'GuluCascaderItem',
     components:{
@@ -82,7 +82,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @import 'var.scss';
+    @import '../var';
     .cascaderItem {
         display: flex;
         align-items: flex-start;
