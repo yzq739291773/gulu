@@ -29,7 +29,6 @@ export default {
     },
     methods:{
         addItem(vm){
-            console.log(11)
             this.items.push(vm)
         },
         updateChildren(){

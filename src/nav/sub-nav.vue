@@ -17,7 +17,6 @@ export default {
     },
     methods:{
         onClick(){
-            console.log(22)
             this.open = !this.open
         }
     }
@@ -29,8 +28,7 @@ export default {
         position: relative;
         span{
             padding: 10px 20px;
-            display: inline-block;
-            vertical-align: top;
+            display: block;
         }
         .g-sub-nav-popover{
             position: absolute;
@@ -39,5 +37,10 @@ export default {
             border: 1px solid red;
             white-space: nowrap;
         }
+    }
+    .g-sub-nav .g-sub-nav .g-sub-nav-popover{
+        top: 0;
+        left: 100%;
+        margin-left: 8px;
     }
 </style>
