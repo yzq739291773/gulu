@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <div class="app" style="padding:100px;">
+      <!-- <div class="app8" style="padding:100px;">
           <g-slides :selected.sync='selected'>
               <g-slides-item name="1">
                   <div class="box">1</div>
@@ -12,8 +12,8 @@
                   <div class="box">3</div>
               </g-slides-item>
           </g-slides>
-      </div>
-    <!-- <div class="app7" style="padding:100px;">
+      </div> -->
+    <!-- <div class="app" style="padding:100px;">
         {{selected}}
         <h1>cascader</h1>
         <g-cascader
@@ -202,7 +202,7 @@
 import Cascader from './cascader.vue'
 import Slides from './slides.vue'
 import SlidesItem from './slides-item.vue'
-import db from './db.js'
+import db from '../tests/fixtures/db.js'
 
 // function ajax(parentId = 0){
 //     return new Promise((resolve,reject)=>{
