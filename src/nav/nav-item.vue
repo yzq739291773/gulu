@@ -1,5 +1,5 @@
 <template>
-    <div class="g-nav-item" :class="{selected}" @click="tabClick">
+    <div class="g-nav-item" :class="{selected}" @click="onClick">
         <slot></slot>
     </div>
 </template>
@@ -23,7 +23,7 @@ export default {
         this.root.addItem(this)
     },
     methods:{
-        tabClick(){
+        onClick(){
             this.$emit('add:selected',this.name)
         }
     }

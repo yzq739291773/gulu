@@ -32,7 +32,7 @@ export default {
   },
   data(){
     return({
-            selected:['culture']
+            selected:['home']
             // source: [{
             //         name: '浙江',
             //         children: [{
