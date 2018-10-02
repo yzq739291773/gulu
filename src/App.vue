@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <h1>1111111</h1>
-      <g-nav :selected="selected" :multiple="false">
+      <g-nav :selected.sync="selected" :multiple="false">
           <g-nav-item name="home">首页</g-nav-item>
           <g-nav-item name="about">关于</g-nav-item>
           <g-nav-item name="hire">招聘</g-nav-item>
@@ -27,6 +27,7 @@ export default {
   },
   data(){
     return({
+            selected:['home']
             // source: [{
             //         name: '浙江',
             //         children: [{

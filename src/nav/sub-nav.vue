@@ -1,5 +1,5 @@
 <template>
-    <div class="subNav">
+    <div class="g-sub-nav">
 
     </div>
 </template>
@@ -11,5 +11,7 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
+    .g-sub-nav{
+        
+    }
 </style>

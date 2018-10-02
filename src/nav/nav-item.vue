@@ -1,6 +1,5 @@
 <template>
-    <div class="navItem">
-        <h1>jskfjk</h1>
+    <div class="g-nav-item" :class="{selected}" @click="tabClick">
         <slot></slot>
     </div>
 </template>
@@ -13,10 +12,25 @@ export default {
             type:String,
             required:true
         }
+    },
+    data(){
+        return{
+            selected:false
+        }
+    },
+    methods:{
+        tabClick(){
+            this.$emit('add:selected',this.name)
+        }
     }
 }
 </script>
 
 <style lang='scss' scoped>
-
+    .g-nav-item{
+        padding: 10px 20px;
+        &.selected{
+            background-color: red;
+        }
+    }
 </style>
