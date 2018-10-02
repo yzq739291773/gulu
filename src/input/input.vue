@@ -16,7 +16,7 @@
     </div>
 </template>
 <script>
-import Icon from './icon'
+import Icon from '../icon'
 export default {
     name:'GuluInput',
     components:{
@@ -42,7 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import 'var.scss';
+@import '../var';
     .wrapper{
         font-size: $font-size;
         display: inline-flex;
