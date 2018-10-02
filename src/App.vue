@@ -199,7 +199,7 @@
 </template>
 
 <script>
-import Cascader from './cascader.vue'
+import Cascader from './cascader/cascader.vue'
 import Slides from './slides.vue'
 import SlidesItem from './slides-item.vue'
 import db from '../tests/fixtures/db.js'
