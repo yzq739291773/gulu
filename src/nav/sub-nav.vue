@@ -1,6 +1,11 @@
 <template>
-    <div class="g-sub-nav" :class="{active}">
-        <span @click="onClick"><slot name="title" ></slot></span>
+    <div class="g-sub-nav" :class="{active}" v-click-outside="close">
+        <span class="g-sub-nav-label" @click="onClick">
+            <slot name="title" ></slot>
+            <span class="g-sub-nav-icon" :class="{open}">
+                <g-icon name="right"></g-icon>
+            </span>
+        </span>
         <div class="g-sub-nav-popover" v-show="open">
             <slot></slot>
         </div>
@@ -8,8 +13,15 @@
 </template>
 
 <script>
+import ClickOutside from '../click-outside.js'
+import Icon from '../icon/icon'
 export default {
     name:'GuluSubNav',
+    directives:{ClickOutside},
+    inject:['root'],
+    components:{
+        'g-icon':Icon
+    },
     props:{
         name:{
             type:String,
@@ -19,16 +31,27 @@ export default {
     data(){
         return{
             open:false,
-            active:false
+        }
+    },
+    computed:{
+        active(){
+            return this.root.namePath.indexOf(this.name)>=0 ? true: false
         }
     },
     methods:{
+        close(){
+            this.open = false;
+        },
         onClick(){
             this.open = !this.open
         },
-        x(){
-            console.log('xx')
+        updateNamePath(){
             this.active = true
+            this.root.namePath.unshift(this.name)
+            if(this.$parent.updateNamePath){
+                this.$parent.updateNamePath()
+            }else{
+            }
         }
     }
 }
@@ -49,9 +72,12 @@ export default {
                 width: 100%;
             }
         }
-        span{
+        &-label{
             padding: 10px 20px;
             display: block;
+        }
+        &-icon{
+            display: none;
         }
         .g-sub-nav-popover{
             background-color: white;
@@ -66,9 +92,33 @@ export default {
             min-width: 8em;
         }
     }
-    .g-sub-nav .g-sub-nav .g-sub-nav-popover{
-        top: 0;
-        left: 100%;
-        margin-left: 8px;
+    .g-sub-nav .g-sub-nav {
+        &.active{
+            &::after{
+                display: none;
+            }
+        }
+        .g-sub-nav-popover{
+            top: 0;
+            left: 100%;
+            margin-left: 8px;
+        }
+        .g-sub-nav-label{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .g-sub-nav-icon{
+            transition: transform .5s;
+            display: inline-flex;
+            margin-left: 1em;
+            svg{
+                fill: $light-color;
+            }
+            &.open{
+                transform: rotate(180deg);
+            }
+        }
     }
+
 </style>

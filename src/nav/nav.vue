@@ -14,7 +14,8 @@ export default {
     },
     data(){
         return{
-            items:[]
+            items:[],
+            namePath:[]
         }
     },
     props:{
@@ -78,5 +79,6 @@ export default {
         border-bottom: 1px solid $grey;
         color: $color;
         cursor: default;
+        user-select: none;
     }
 </style>
